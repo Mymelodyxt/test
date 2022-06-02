@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.DictionaryMapper">
+
+    <resultMap id="Dictionaryt" type="com.pojo.Dictionary">
+        <result column="c_Sysname" property="cSysname"></result>
+        <result column="l_Keyno" property="lKeyno"></result>
+        <result column="c_Keyvalue" property="cKeyvalue"></result>
+        <result column="c_Caption" property="cCaption"></result>
+        <result column="c_Modify" property="cModify"></result>
+        <result column="c_Memo" property="cMemo"></result>
+        <result column="c_Memo" property="cMemo"></result>
+        <result column="c_English" property="cEnglish"></result>
+        <result column="l_Order" property="lOrder"></result>
+    </resultMap>
+
+    <select id="selectList" resultMap="Dictionaryt" parameterType="map">
+
+        select c_Sysname ,
+               l_Keyno  ,
+               c_Keyvalue  ,
+               c_Caption ,
+               c_Modify  ,
+               c_Memo ,
+               c_English ,
+               l_Order
+        from sys_dictionary
+        where
+           c_Sysname = #{cSysname}
+          and l_Keyno = #{lKeyno}
+
+    </select>
+
+</mapper>

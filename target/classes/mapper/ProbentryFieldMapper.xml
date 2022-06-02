@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.ProbentryFieldMapper">
+
+
+    <select id="getTreeField" resultType="com.pojo.ProbentryField">
+        select l_id,c_dirname,l_pid
+        from orm_probentry_field
+    </select>
+
+    <select id="getAll" resultType="com.pojo.ProbentryVo">
+        select  t1.l_Pid,t1.c_Entry_Desc,t1.c_Risk_Level,t1.c_Pname,
+               t1.c_Define_Basis,t1.c_Deal_Basis,t1.l_Id
+--                ,t2.l_id as lid2,t2.c_dirname,t2.l_pid as lpid2
+        from orm_probentry t1 join orm_probentry_field t2
+        on t1.l_pid = t2.l_id
+    </select>
+
+</mapper>

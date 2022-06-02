@@ -1,0 +1,108 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.InfoMapper">
+
+
+    <select id="selectTest" resultType="com.pojo.Info" parameterType="map">
+        select t1.l_Id,
+        t1.c_Warnno,
+        c_Warnname,
+        c_Warnlevel,
+        c_Bussline,
+        c_Busstype,
+        c_Busssystem,
+        c_Orgno,
+        c_Orgname,
+        c_Netorgno,
+        c_Netorgname,
+        c_Operator,
+        c_Operatorname,
+        c_Operatorgno,
+        c_Operatorgname,
+        c_Legalorgno,
+        c_Legalorgname,
+        c_Custno,
+        c_Custname,
+        c_Accountno,
+        t1.c_Warndate,
+        c_Warncontent,
+        d_Datadate,
+        c_Inputdate,
+        c_Istransfer,
+        c_Isproblem,
+        c_Isouttime,
+        c_Assistway,
+        c_Warnsource,
+        c_Warnstatus,
+        c_Warnbatchtype,
+        t1.c_Isuse,
+        d_Dealenddate,
+        c_Warnid,
+        c_Unid,
+        c_Amount,
+        c_Problemtype,
+        t1.c_Createtime,
+        c_Phone_No,
+        c_Cert_No,
+        c_Second,
+        c_Eventlist,
+        c_Biz_Code,
+        c_Biz_Channel,
+        c_Oper_Time,
+        c_Serial_Id,
+        c_Dealstatus
+        from orm_warn_info t1
+        join orm_warn_task t2
+        on t1.l_id = t2.l_id
+        <where>
+            <if test="ormWarnInfoVO.cWarnno != null and ormWarnInfoVO.cWarnno !='' ">t1.c_Warnno =
+                #{ormWarnInfoVO.cWarnno}
+            </if>
+            <if test="ormWarnInfoVO.cWarnid !=null and ormWarnInfoVO.cWarnid !='' ">and t1.c_Warnid =
+                #{ormWarnInfoVO.cWarnid}
+            </if>
+            <if test="ormWarnInfoVO.cWarnname !=null and ormWarnInfoVO.cWarnname !='' ">and t1.c_Warnname =
+                #{ormWarnInfoVO.cWarnname}
+            </if>
+            <if test="ormWarnInfoVO.cWarnlevel !=null and ormWarnInfoVO.cWarnlevel !=''">and t1.c_Warnlevel =
+                #{ormWarnInfoVO.cWarnlevel}
+            </if>
+            <if test="ormWarnInfoVO.cBusssystem !=null and ormWarnInfoVO.cBusssystem !='' ">and t1.c_Busssystem =
+                #{ormWarnInfoVO.cBusssystem}
+            </if>
+            <if test="ormWarnInfoVO.cBusstype !=null and ormWarnInfoVO.cBusstype !=''">and t1.c_Busstype =
+                #{ormWarnInfoVO.cBusstype}
+            </if>
+            <if test="ormWarnInfoVO.cWarnstatus !=null and ormWarnInfoVO.cWarnstatus !=''">and t1.c_Warnstatus =
+                #{ormWarnInfoVO.cWarnstatus}
+            </if>
+            <if test="ormWarnInfoVO.cDealstatus !=null and ormWarnInfoVO.cDealstatus !=''">and c_Dealstatus =
+                #{ormWarnInfoVO.cDealstatus}
+            </if>
+            <if test="wtStart !=null">and t1.c_warnDate >= #{wtStart}</if>
+            <if test="wtEnd !=null">and t1.c_warnDate &lt;= #{wtEnd}</if>
+        </where>
+        limit #{currentPage}, #{pageSize}
+    </select>
+
+    <select id="selectExport" resultType="com.pojo.Info" parameterType="map">
+        select l_Id,
+        c_Warnno,
+        c_Warnname,
+        c_Warnlevel,
+        c_Bussline,
+        c_Busstype,
+        c_Busssystem,
+        c_Orgno,
+        c_Orgname
+        from orm_warn_info
+        where l_id in
+        <foreach collection="lId" item="lId" separator=","
+                 open="(" close=")">
+            #{lId}
+        </foreach>
+    </select>
+
+</mapper>
